@@ -1,0 +1,146 @@
+@import '../node_modules/modern-normalize/modern-normalize.css';
+
+body {
+  background: linear-gradient(
+    to bottom right,
+    #274b74 0%,
+    #8233c5 50%,
+    #e963fd 100%
+  );
+  height: auto;
+  min-height: 100vh;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+}
+
+input[type='text'] {
+  position: relative;
+  padding: 15px 40px 15px 20px;
+  width: 250px;
+  color: #525252;
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  background: linear-gradient(to right, #ffffff 0%, #464747 #f9f9f9 100%);
+  outline: none;
+  line-height: 1;
+}
+
+.fa {
+  position: relative;
+  color: #8233c5;
+  background-color: white;
+  border: none;
+  border-radius: 0px 5px 5px 0px;
+  width: 60px;
+}
+
+a {
+  color: #8233c5;
+  text-decoration: none;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+  justify-content: center;
+}
+
+.gallery__link {
+  display: block;
+}
+
+.gallery__item {
+  width: 400px;
+  height: 300px;
+  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+  border-radius: 0px 0px 4px 4px;
+  background-color: white;
+}
+
+.gallery-item_img {
+  width: 400px;
+  height: 225px;
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+header {
+  width: 100%;
+  height: 60px;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: linear-gradient(
+    to bottom right,
+    #2c4a7999 0%,
+    #2b4a7891 50%,
+    #573e9f8f 75%,
+    #8133c55f 100%
+  );
+}
+
+img {
+  display: block;
+  object-fit: cover;
+}
+
+.container {
+  max-width: 1800px;
+  margin: auto;
+}
+
+.loader {
+  display: none;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+  width: 10px;
+  border-radius: 4px;
+  color: #fff;
+  background: currentColor;
+  position: relative;
+  animation: ht 1s ease-in infinite alternate;
+  box-shadow: 15px 0 0 -1px, -15px 0 0 -1px, 30px 0 0 -2px, -30px 0 0 -2px,
+    45px 0 0 -3px, -45px 0 0 -3px;
+}
+
+@keyframes ht {
+  100% {
+    height: 0px;
+  }
+}
+
+.loader.visible {
+  display: block;
+}
+
+.fa:hover {
+  background-color: inherit;
+  color: white;
+  border-color: #fff;
+  border-width: 5px;
+  border-style: double;
+}
