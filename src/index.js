@@ -11,6 +11,7 @@ const lightbox = new SimpleLightbox('.gallery a');
 let page = 1;
 let totalPages;
 
+// Додана нова змінна для визначення відстані до кінця сторінки
 const distanceToBottom = 5;
 
 async function pageInfo(page) {
@@ -121,4 +122,5 @@ async function loadNextImages(entries, observer) {
 }
 
 const observer = new IntersectionObserver(loadNextImages);
+
 form.addEventListener('submit', sendRequest);
