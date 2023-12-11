@@ -9,8 +9,11 @@ const main = document.querySelector('main');
 const form = document.querySelector('#search-form');
 const lightbox = new SimpleLightbox('.gallery a');
 let page = 1;
-let totalPages = 1; 
-console.log(totalPages);
+let totalPages = 1;
+
+// Додана нова змінна для визначення відстані до кінця сторінки
+const distanceToBottom = 5;
+
 async function pageInfo(page) {
   const params = new URLSearchParams({
     per_page: 40,
@@ -39,17 +42,13 @@ async function sendRequest(event) {
   await imageProcessing(response.data.hits);
 
   if (response.data.totalHits === 0) {
-    Notiflix.Notify.failure(
-      "Sorry, we didn't find any images for your request"
-    );
+    Notiflix.Notify.failure("Sorry, we didn't find any images for your request");
     loader.classList.remove('visible');
     main.style.marginTop = '0px';
   } else if (response.data.totalHits === 1) {
     Notiflix.Notify.success(`Hooray! We found 1 image.`);
   } else {
-    Notiflix.Notify.success(
-      `Hooray! We found ${response.data.totalHits} images.`
-    );
+    Notiflix.Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
   }
 }
 
@@ -97,14 +96,6 @@ async function loadNextImages(entries, observer) {
       const images = response.data.hits;
       loader.classList.remove('visible');
 
-      if (images.length === 0 && response.data.totalHits !== 0) {
-        observer.unobserve(loader);
-        Notiflix.Notify.info(
-          `We're sorry, but you've reached the end of search results.`
-        );
-        return;
-      }
-
       imageProcessing(images);
 
       const { height: cardHeight } = document
@@ -123,3 +114,20 @@ const observer = new IntersectionObserver(loadNextImages);
 observer.observe(loader);
 
 form.addEventListener('submit', sendRequest);
+
+let endOfCollectionNotified = false; // Додана змінна для відстеження вже відображених повідомлень
+
+window.addEventListener('wheel', function (event) {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  if (!endOfCollectionNotified && event.deltaY > 0 && scrollTop + clientHeight >= scrollHeight - distanceToBottom) {
+    // Користувач прокрутив сторінку вниз
+
+    // Визначте відстань до кінця сторінки
+    Notiflix.Notify.info(`You've reached the end of the collection.`);
+    loader.classList.remove('visible');
+
+    // Помічаємо, що повідомлення вже відображено
+    endOfCollectionNotified = true;
+  }
+});
+
